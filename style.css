@@ -1,0 +1,144 @@
+cat > style.css << 'EOF'
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.game-box {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.instruction {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.input-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+#submitBtn {
+    background: #667eea;
+    color: white;
+}
+
+#submitBtn:hover {
+    background: #5568d3;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.feedback {
+    background: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.feedback.too-high {
+    background: #ffe5e5;
+    color: #c33;
+}
+
+.feedback.too-low {
+    background: #e5f0ff;
+    color: #33c;
+}
+
+.feedback.correct {
+    background: #e5ffe5;
+    color: #3c3;
+    font-size: 1.3em;
+}
+
+.stats {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid #667eea;
+}
+
+.stats p {
+    margin: 8px 0;
+    color: #555;
+}
+
+.stats span {
+    font-weight: bold;
+    color: #667eea;
+}
+
+.reset-btn {
+    width: 100%;
+    background: #764ba2;
+    color: white;
+}
+
+.reset-btn:hover {
+    background: #6a3d8e;
+}
+EOF

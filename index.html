@@ -1,0 +1,42 @@
+cat > index.html << 'EOF'
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜數字遊戲</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 猜數字遊戲</h1>
+        
+        <div class="game-box">
+            <p class="instruction">我想的是 1 到 100 之間的一個數字，你能猜中嗎？</p>
+            
+            <div class="input-section">
+                <input 
+                    type="number" 
+                    id="guessInput" 
+                    placeholder="輸入你的猜測（1-100）" 
+                    min="1" 
+                    max="100"
+                >
+                <button id="submitBtn" onclick="makeGuess()">提交猜測</button>
+            </div>
+            
+            <div id="feedback" class="feedback"></div>
+            
+            <div class="stats">
+                <p>猜測次數: <span id="attempts">0</span></p>
+                <p>上次猜測: <span id="lastGuess">-</span></p>
+            </div>
+            
+            <button id="resetBtn" onclick="resetGame()" class="reset-btn">重新開始</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+EOF

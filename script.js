@@ -1,4 +1,3 @@
-cat > script.js << 'EOF'
 let secretNumber = 0;
 let attempts = 0;
 let gameOver = false;
@@ -68,4 +67,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-EOF

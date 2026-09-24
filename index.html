@@ -1,42 +1,87 @@
-cat > index.html << 'EOF'
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="猜一個 1 到 100 之間的秘密數字">
     <title>猜數字遊戲</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>🎮 猜數字遊戲</h1>
-        
-        <div class="game-box">
-            <p class="instruction">我想的是 1 到 100 之間的一個數字，你能猜中嗎？</p>
-            
-            <div class="input-section">
-                <input 
-                    type="number" 
-                    id="guessInput" 
-                    placeholder="輸入你的猜測（1-100）" 
-                    min="1" 
-                    max="100"
-                >
-                <button id="submitBtn" onclick="makeGuess()">提交猜測</button>
-            </div>
-            
-            <div id="feedback" class="feedback"></div>
-            
-            <div class="stats">
-                <p>猜測次數: <span id="attempts">0</span></p>
-                <p>上次猜測: <span id="lastGuess">-</span></p>
-            </div>
-            
-            <button id="resetBtn" onclick="resetGame()" class="reset-btn">重新開始</button>
-        </div>
+    <!-- 背景的漂浮光斑 -->
+    <div class="blobs" aria-hidden="true">
+        <span></span><span></span><span></span>
     </div>
+
+    <!-- 猜中時放彩帶用的畫布 -->
+    <canvas id="confetti" aria-hidden="true"></canvas>
+
+    <main class="card" id="card">
+        <header class="card-header">
+            <span class="badge">1 – 100</span>
+            <h1>猜數字</h1>
+            <p class="subtitle">我心裡想了一個數字，你能用最少次數猜中嗎？</p>
+        </header>
+
+        <!-- 目前可能的範圍：每猜一次就縮小 -->
+        <section class="range" aria-label="目前可能範圍">
+            <div class="range-labels">
+                <span id="rangeLow">1</span>
+                <span class="range-title">秘密數字就在這裡面</span>
+                <span id="rangeHigh">100</span>
+            </div>
+            <div class="range-track">
+                <div class="range-fill" id="rangeFill"></div>
+                <div class="range-markers" id="rangeMarkers"></div>
+            </div>
+        </section>
+
+        <!-- 用 form 包起來，按 Enter 或按鈕都能送出 -->
+        <form class="guess-form" id="guessForm" autocomplete="off">
+            <label for="guessInput" class="visually-hidden">輸入你的猜測</label>
+            <input
+                type="number"
+                id="guessInput"
+                inputmode="numeric"
+                min="1"
+                max="100"
+                placeholder="?"
+                required
+            >
+            <button type="submit" id="submitBtn" class="btn btn-primary">猜！</button>
+        </form>
+
+        <!-- aria-live 讓螢幕閱讀器會念出提示 -->
+        <p id="feedback" class="feedback" role="status" aria-live="polite">輸入 1 到 100 的數字開始吧</p>
+
+        <section class="stats" aria-label="統計">
+            <div class="stat">
+                <span class="stat-value" id="attempts">0</span>
+                <span class="stat-label">猜測次數</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value" id="lastGuess">–</span>
+                <span class="stat-label">上次猜測</span>
+            </div>
+            <div class="stat">
+                <span class="stat-value" id="bestScore">–</span>
+                <span class="stat-label">最佳紀錄</span>
+            </div>
+        </section>
+
+        <section class="history" aria-label="猜測紀錄">
+            <h2>猜測紀錄</h2>
+            <ol id="historyList" class="history-list">
+                <li class="history-empty">還沒有猜測</li>
+            </ol>
+        </section>
+
+        <button type="button" id="resetBtn" class="btn btn-ghost">↻ 重新開始</button>
+    </main>
 
     <script src="script.js"></script>
 </body>
 </html>
-EOF
